@@ -104,3 +104,9 @@ node scripts/release.mjs
 2026-11-10 已复跑两组共 39 项自动测试，并在真实 0.2.2-rc.1 隔离宿主中验证删除前保存、删除后重启、重复提交与项目文件保留。结果见 dsh-usage-stats/qa/retention-integration.json。另从已有隔离副本补回两条先前已删除会话的 18,753,845 Token，仅代表副本时点；未恢复聊天日志。
 
 维护时先阅读对应 `项目说明.md` 和 `README.md`。统计口径问题查看聚合与图表模型；归档删除问题查看管理服务与日志清除适配。不要直接手改日常删除标记来尝试恢复已经清除的日志。
+
+## 开源许可
+
+本仓库的原创代码采用 Apache License 2.0，完整条款见 [LICENSE](LICENSE)。
+
+上游署名和第三方依赖的许可信息见各插件的 `NOTICE.md` 和 `licenses/` 目录。[使用统计声明](dsh-usage-stats/NOTICE.md) · [归档管理声明](dsh-archive-manager/NOTICE.md)
