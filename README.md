@@ -8,10 +8,21 @@
 
 | 项目 | 包名与当前版本 | DSH 入口 | 主要用途 |
 | --- | --- | --- | --- |
-| [使用统计项目说明](dsh-usage-stats/项目说明.md) | `dsh-usage-stats-local` 1.2.4 | 设置 → 使用统计 | 本机会话 Token 总量与四项明细、活动热力图、模型趋势与占比 |
-| [归档管理项目说明](dsh-archive-manager/项目说明.md) | `dsh-archive-manager-local` 2.3.0 | 对话顶部、侧栏会话菜单、设置 → 归档管理 | 停止后直接删除，支持筛选删除、清理进度、子智能体清理和中断后续删 |
+| [使用统计项目说明](dsh-usage-stats/项目说明.md) | [`dsh-usage-stats-local` 1.2.4](https://www.npmjs.com/package/dsh-usage-stats-local/v/1.2.4) | 设置 → 使用统计 | 本机会话 Token 总量与四项明细、活动热力图、模型趋势与占比 |
+| [归档管理项目说明](dsh-archive-manager/项目说明.md) | [`dsh-archive-manager-local` 2.3.0](https://www.npmjs.com/package/dsh-archive-manager-local/v/2.3.0) | 对话顶部、侧栏会话菜单、设置 → 归档管理 | 停止后直接删除，支持筛选删除、清理进度、子智能体清理和中断后续删 |
 
 两个项目可以分别构建、安装和卸载，不要求同时启用。工作区根目录没有统一的 npm 工程，开发命令应在对应插件文件夹执行。
+
+## 从 npm 下载安装
+
+以下版本适配 **DeepSeek Harness 0.2.2-rc.1**。在 DSH 桌面端打开「插件 → 添加插件」，选择 npm 官方源（`https://registry.npmjs.org/`），粘贴所需插件的包名和版本，然后确认安装。
+
+```text
+dsh-usage-stats-local@1.2.4
+dsh-archive-manager-local@2.3.0
+```
+
+两个插件可以单独安装。需要安装两个时，分别提交上面的两条包名。安装后完全退出并重新打开 DSH，在已安装插件列表核对版本。
 
 ## 目录结构
 
@@ -56,7 +67,7 @@ F:\dsh-youhua\
 
 2026-11-10 已将两个插件从工作区目录链接切换为 `.tgz` 安装。运行文件位于 `C:\Users\ASUS\.dsh\profiles\desktop\node_modules\` 下各自的插件目录，不再链接工作区；工作区完整保留，没有在 DSH 下额外保存安装包备份。已核对安装文件与当前构建一致、插件入口可独立导入、用量记录未变。
 
-本工作区新增插件的首次安装和已有插件的更新，都必须从带版本号的 `.tgz` 安装包安装到 DSH。可在 DSH「添加插件」对话框顶部填写 `.tgz` 文件的完整路径，也可运行对应的 `install.ps1`。
+在本工作区开发和验证插件时，首次安装或更新到本机 DSH 桌面配置都要使用带版本号的 `.tgz`。可在 DSH「添加插件」对话框顶部填写 `.tgz` 文件的完整路径，也可运行对应的 `install.ps1`。
 
 ## 更新与交付
 
