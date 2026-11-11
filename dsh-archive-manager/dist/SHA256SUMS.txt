@@ -1,0 +1,12 @@
+ef93b014162ff5a20e653a9f331e02e5182f9ba98bc23743e118fbf243e25977  dsh-archive-manager-local-1.0.0.tgz
+e957fb32379da783721ac6ff2d7d4de2468abd1ad4a6495f57451eb7b7509af8  dsh-archive-manager-local-1.1.0.tgz
+1a5dcf7de70d29949c84147452bdd7023e21c269b45196008cb8456f2124c5f0  dsh-archive-manager-local-1.2.0.tgz
+6e418a6b0fe23546efc862ce123d5f9177051664515ad748b6898c4cbb8d4d61  dsh-archive-manager-local-2.0.0.tgz
+ded5c868e15f0434912e4cb40ceafcd64a794d3e15120489174dec193e69d665  dsh-archive-manager-local-2.0.1.tgz
+89372ba8f65e4e2ba5d264125f23b85a36846191bbd8fecf2d6505be7e9b0ca9  dsh-archive-manager-local-2.0.2.tgz
+b5989b35c24af630c1fdf661f3d0a6d2b5f463e30ff197f3a3d4931311568c04  dsh-archive-manager-local-2.0.3.tgz
+752580e638bdd2508816b1019bae650c292c39fbe38cd83ce22cd18f5ee3ede9  dsh-archive-manager-local-2.1.0.tgz
+94544ffcf627da0a54abfd83718759722f5c320c698a93b4c60515d623788671  dsh-archive-manager-local-2.2.0.tgz
+5724726073f7ee897a57713e773185148834d485c20a554232b6f34530007ee5  dsh-archive-manager-local-2.2.1.tgz
+409d671be009a4d4e8f88cc2d511ce506496b23308e01193c7bc729fc7b64753  dsh-archive-manager-local-2.2.2.tgz
+4b9eb40e809eb0fc16c920da16594b6614f1ecd76394f333b4432b452c4a8fa9  dsh-archive-manager-local-2.3.0.tgz

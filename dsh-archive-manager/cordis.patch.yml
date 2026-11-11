@@ -1,0 +1,7 @@
+- insert:
+    - id: archive-manager-local
+      name: dsh-archive-manager-local
+      config:
+        backupScanRoots:
+          - F:/dsh-youhua/dsh-usage-stats/.sandbox
+          - F:/dsh-youhua/dsh-archive-manager/.sandbox

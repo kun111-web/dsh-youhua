@@ -1,0 +1,8 @@
+502eccaa6b8956fac5fea2c696033cc9b8d276336da9d47f4f7de8d6a496dc07  dsh-usage-stats-local-1.0.0.tgz
+62ca91cf47725c79367eca1de2acc706103e9832c78a5917355beb00271279c2  dsh-usage-stats-local-1.1.0.tgz
+42050eea96168de50ca3d7875168a868b5b502fca8a79efe6cc8ab87acc35ee4  dsh-usage-stats-local-1.1.1.tgz
+4583ccb96576b27940d1ad2df620642b498c7621b19e8867d902eed9a1889314  dsh-usage-stats-local-1.2.0.tgz
+a0be1b6fde65d9aa45fdbd7bf1ff5136d3228e7e3d9a785c06d6da21ac9b59ed  dsh-usage-stats-local-1.2.1.tgz
+4e0999c88dc4278771e451cee9053912149c6231cdab917f61d5651ed4bb5ef4  dsh-usage-stats-local-1.2.2.tgz
+6845a83ec3bec14ce4cd1e634f70ad2470b742035a274cd65a1b96f03337814b  dsh-usage-stats-local-1.2.3.tgz
+99e8f99e9db2f7f8b9785bd53362ed484f432b9b10e8588364661b31963fcb2e  dsh-usage-stats-local-1.2.4.tgz

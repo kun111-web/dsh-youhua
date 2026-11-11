@@ -1,0 +1,12 @@
+/.playwright-cli/
+/output/
+/.dsh/
+.env
+.env.*
+*.log
+node_modules/
+.preview/
+.research/
+.sandbox/
+/dsh-archive-manager/qa/
+/dsh-usage-stats/qa/

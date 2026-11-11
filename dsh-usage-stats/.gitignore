@@ -1,0 +1,8 @@
+node_modules/
+.research/
+.sandbox/
+.preview/
+dist/
+lib/
+qa/*.png
+qa/local-data.json

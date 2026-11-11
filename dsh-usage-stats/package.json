@@ -1,0 +1,51 @@
+{
+  "name": "dsh-usage-stats-local",
+  "version": "1.2.4",
+  "description": "v1.2.4 · DSH 使用统计，复用未变化的用量汇总并统一删除前校验",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "README.md",
+    "NOTICE.md",
+    "LICENSE",
+    "licenses",
+    "项目说明.md"
+  ],
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=24.0.0",
+    "dsh": "0.2.2-rc.1"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-renderer",
+        "@deepseek-ai/dsh-client-ui-settings-general"
+      ]
+    }
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test test/*.test.mjs",
+    "preview": "node scripts/preview.mjs",
+    "pack:plugin": "npm run build && npm pack --pack-destination dist"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "recharts": "^3.0.0",
+    "lucide-react": "^0.468.0"
+  }
+}
