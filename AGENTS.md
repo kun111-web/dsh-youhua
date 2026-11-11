@@ -11,3 +11,11 @@
 1. 同步更新插件 `package.json` 的版本和描述中的版本号，以及 `package-lock.json` 的顶层和根包版本。
 2. 将 `install.ps1` 指向新版安装包，并更新工作区及插件文档中的当前版本和安装示例。历史版本记录按原版本保留。
 3. 发布新版时运行测试并生成新版 `.tgz`，核对包内版本并更新 `dist/SHA256SUMS.txt`。
+
+## GitHub 同步
+
+工作区对应 GitHub 主仓库 [kun111-web/dsh-youhua](https://github.com/kun111-web/dsh-youhua)。本地 `main` 跟踪 `origin/main`。
+
+1. 同步前用 `git status --short --branch` 和 `git diff` 确认当前分支及改动范围，只暂存本次任务涉及的文件。
+2. 发布新版时，将版本改动、对应 `.tgz` 和 `dist/SHA256SUMS.txt` 一起提交。会话数据、隔离环境和本机 QA 产物留在本地。
+3. 推送 `main` 后，核对 GitHub 的 `main` 已包含本次提交。

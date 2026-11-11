@@ -2,6 +2,8 @@
 
 更新日期：2026-11-11。
 
+GitHub 主仓库为 [kun111-web/dsh-youhua](https://github.com/kun111-web/dsh-youhua)，默认分支为 `main`。
+
 本工作区用于开发和维护 DeepSeek Harness 的本地插件。目前包含「使用统计」和「归档管理」两个独立项目，功能和界面参考 ZCode 官方项目，没有采用 dsh-scope。插件通过 DSH 扩展机制加载，不修改主程序 `app.asar`。
 
 ## 插件导航
@@ -94,6 +96,14 @@ node scripts/release.mjs
 脚本核对包内版本和运行文件，将安装包写入各自的 `dist/` 并更新 `SHA256SUMS.txt`。已有同版本包内容有差异时会要求升版。各插件的 `npm run pack:plugin` 仍可单独用于开发打包。
 
 当前安装包为使用统计 1.2.4、归档管理 2.3.0。旧版本安装包保留为历史文件。
+
+## 同步到 GitHub
+
+在工作区根目录检查 `git status --short --branch` 和 `git diff`，确认本地 `main` 跟踪 `origin/main`。逐项暂存本次要提交的文件，再用 `git diff --cached` 核对内容。
+
+发布新版时，把对应的 `.tgz` 和 `dist/SHA256SUMS.txt` 一起提交。若新版安装包被 `dist/` 的忽略规则匹配，可用 `git add -f` 暂存对应文件。会话、隔离环境和本机 QA 产物留在本地。
+
+提交后运行 `git push origin main`，在 GitHub 的 `main` 分支核对提交和文件。
 
 ## 两个插件的数据关系
 
