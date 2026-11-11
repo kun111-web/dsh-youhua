@@ -1,4 +1,4 @@
-# DSH 使用统计 1.3.0
+# DSH 使用统计 1.3.1
 
 项目实现与维护说明见 [项目说明.md](项目说明.md)，工作区导航见 [总说明](../README.md)。
 
@@ -21,7 +21,7 @@
 
 当前目标版本：**DeepSeek Harness Desktop 0.2.2-rc.1**。已在相同版本的独立测试 profile 验证。其他 DSH 版本没有宣称兼容。
 
-从 npm 安装并启用 `dsh-usage-stats-local@1.3.0` 后，点击「插件 → 已安装插件 → 使用统计插件详情 → 检查并更新」。开启详情页的「自动更新」后，DSH 会在运行期间定期检查并安装兼容的 npm 正式版。需要重启时会显示提示。
+在 Windows 版 DSH 从 npm 安装并启用 `dsh-usage-stats-local@1.3.1` 后，点击「插件 → 已安装插件 → 使用统计插件详情 → 检查并安排更新」。开启「自动更新」会定期检查，完全退出 DSH 后再安装兼容的 npm 正式版。
 
 本机日常 desktop profile 使用 `.tgz` 安装包。首次安装或更新时，在 PowerShell 运行安装脚本。
 
@@ -32,7 +32,7 @@
 或使用桌面版自带命令直接安装已构建的包：
 
 ```powershell
-& 'D:\deepseek\resources\runtime\cli\bin\dsh.cmd' plugin --profile desktop add 'F:\dsh-youhua\dsh-usage-stats\dist\dsh-usage-stats-local-1.3.0.tgz'
+& 'D:\deepseek\resources\runtime\cli\bin\dsh.cmd' plugin --profile desktop add 'F:\dsh-youhua\dsh-usage-stats\dist\dsh-usage-stats-local-1.3.1.tgz'
 ```
 
 然后完全退出并重新打开 DSH，在设置左侧点击「使用统计」。此插件不修改主程序 app.asar。

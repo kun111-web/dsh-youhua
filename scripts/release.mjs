@@ -51,7 +51,7 @@ async function prepare(info, stage) {
   assert.equal(manifest.name, info.name);
   assert.equal(manifest.version, info.version);
   assert.equal(manifest.description, info.description);
-  for (const file of ['lib/index.js', 'lib/client.js', 'cordis.patch.yml']) {
+  for (const file of ['lib/index.js', 'lib/client.js', 'lib/update-on-exit.mjs', 'cordis.patch.yml']) {
     assert.ok(extract(file).equals(await readFile(path.join(info.dir, file))), `${info.name} 的包内文件不一致：${file}`);
   }
 

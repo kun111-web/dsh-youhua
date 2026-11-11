@@ -1,7 +1,7 @@
 {
   "name": "dsh-archive-manager-local",
-  "version": "2.4.0",
-  "description": "v2.4.0 · DSH 归档管理，支持检查更新和自动安装 npm 新版",
+  "version": "2.4.1",
+  "description": "v2.4.1 · DSH 归档管理，完全退出 DSH 后安装 npm 更新",
   "type": "module",
   "main": "lib/index.js",
   "exports": {

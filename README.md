@@ -10,8 +10,8 @@ GitHub 主仓库为 [kun111-web/dsh-youhua](https://github.com/kun111-web/dsh-yo
 
 | 项目 | 包名与当前版本 | DSH 入口 | 主要用途 |
 | --- | --- | --- | --- |
-| [使用统计项目说明](dsh-usage-stats/项目说明.md) | [`dsh-usage-stats-local` 1.3.0](https://www.npmjs.com/package/dsh-usage-stats-local/v/1.3.0) | 设置 → 使用统计 | 本机会话 Token 总量与四项明细、活动热力图、模型趋势与占比 |
-| [归档管理项目说明](dsh-archive-manager/项目说明.md) | [`dsh-archive-manager-local` 2.4.0](https://www.npmjs.com/package/dsh-archive-manager-local/v/2.4.0) | 对话顶部、侧栏会话菜单、设置 → 归档管理 | 停止后直接删除，支持筛选删除、清理进度、子智能体清理和中断后续删 |
+| [使用统计项目说明](dsh-usage-stats/项目说明.md) | [`dsh-usage-stats-local` 1.3.1](https://www.npmjs.com/package/dsh-usage-stats-local/v/1.3.1) | 设置 → 使用统计 | 本机会话 Token 总量与四项明细、活动热力图、模型趋势与占比 |
+| [归档管理项目说明](dsh-archive-manager/项目说明.md) | [`dsh-archive-manager-local` 2.4.1](https://www.npmjs.com/package/dsh-archive-manager-local/v/2.4.1) | 对话顶部、侧栏会话菜单、设置 → 归档管理 | 停止后直接删除，支持筛选删除、清理进度、子智能体清理和中断后续删 |
 
 两个项目可以分别构建、安装和卸载，不要求同时启用。工作区根目录没有统一的 npm 工程，开发命令应在对应插件文件夹执行。
 
@@ -20,17 +20,19 @@ GitHub 主仓库为 [kun111-web/dsh-youhua](https://github.com/kun111-web/dsh-yo
 以下版本适配 **DeepSeek Harness 0.2.2-rc.1**。在 DSH 桌面端打开「插件 → 添加插件」，选择 npm 官方源（`https://registry.npmjs.org/`），粘贴所需插件的包名和版本，然后确认安装。
 
 ```text
-dsh-usage-stats-local@1.3.0
-dsh-archive-manager-local@2.4.0
+dsh-usage-stats-local@1.3.1
+dsh-archive-manager-local@2.4.1
 ```
 
 两个插件可以单独安装。需要安装两个时，分别提交上面的两条包名。安装后完全退出并重新打开 DSH，在已安装插件列表核对版本。
 
 ### 检查更新
 
-从 npm 安装并启用后，在「插件 → 已安装插件」点击插件名称，在详情页选择「检查并更新」。有符合条件的 npm 正式版时，DSH 会直接安装。已使用旧版的用户可先通过 DSH 自带的刷新和版本更新功能升级到上面的版本。
+在 Windows 版 DSH 从 npm 安装并启用插件后，可在「插件 → 已安装插件 → 插件详情」选择「检查并安排更新」。发现兼容的 npm 正式版时记录待更新版本，等 DSH 完全退出后通过 DSH CLI 安装。Windows 上点窗口的「×」通常会隐藏到托盘，需通过托盘菜单退出 DSH。
 
-「自动更新」默认关闭，可在两个插件的详情页分别开启。开启后会立即检查，随后在 DSH 运行期间每 6 小时检查一次。只更新到 npm 官方源标记为 latest 且兼容当前 DSH 的正式版。归档管理正在删除或恢复会话时会推迟安装。DSH 需要重启时会在详情页提示。
+「自动更新」默认关闭，可在两个插件的详情页分别开启。开启后会立即检查，随后在 DSH 运行期间每 6 小时检查一次。只安排 npm 官方源标记为 latest 且兼容当前 DSH 的正式版。退出后会再次核对待更新版本及安装来源。若 DSH 已重新打开，待更新项保留到下次退出。已有的自动更新开关会沿用。
+
+使用 DSH 自带的「版本」区手动安装时，插件会在开始改动配置前检查运行中或排队的任务，以及归档管理的删除和恢复操作。若检测到活动，会提示暂缓。
 
 ## 目录结构
 
@@ -101,7 +103,7 @@ node scripts/release.mjs
 
 脚本核对包内版本和运行文件，将安装包写入各自的 `dist/` 并更新 `SHA256SUMS.txt`。已有同版本包内容有差异时会要求升版。各插件的 `npm run pack:plugin` 仍可单独用于开发打包。
 
-当前安装包为使用统计 1.3.0、归档管理 2.4.0。旧版本安装包保留为历史文件。
+当前安装包为使用统计 1.3.1、归档管理 2.4.1。旧版本安装包保留为历史文件。
 
 ## 同步到 GitHub
 

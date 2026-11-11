@@ -90,7 +90,7 @@ export async function apply(ctx,config={}) {
   let archiveWrites = 0;
   let updating = false;
   registerPluginUpdates(ctx, { name, version: manifest.version, claimUpdate() {
-    if (archiveWrites) return null;
+    if (archiveWrites || updating) return null;
     updating = true;
     return () => { updating = false; };
   } });
