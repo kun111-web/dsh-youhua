@@ -3,6 +3,7 @@ import {Archive,Trash2} from 'lucide-react';
 import {api, App, DeleteDialog, useDeleteProgress} from './App.jsx';
 import css from './style.css';
 import {installSidebarPolicy} from './sidebar-policy.js';
+import {registerUpdateControls} from '../../../dsh-usage-stats/src/client/PluginUpdates.jsx';
 export const inject=['slots','uiWorkspace','contextMenus'];
 
 function DirectDelete({target,onClose}) {
@@ -45,6 +46,7 @@ function DirectDelete({target,onClose}) {
 }
 
 export function apply(ctx){
+  registerUpdateControls(ctx, 'dsh-archive-manager-local');
   ctx.effect(()=>installSidebarPolicy(ctx.uiWorkspace.view),'archive-manager active-only sidebar');
   ctx.effect(()=>{const style=document.createElement('style');style.dataset.plugin='dsh-archive-manager-local';style.textContent=css;document.head.append(style);return()=>style.remove();});
   ctx.slots.inject('settings.section',()=>ctx.slots.register({name:'settings.section',id:'archive-manager-local',order:26,label:()=> '归档管理'},App));

@@ -5,6 +5,8 @@ import { acquireLedger, preserveSessionUsage, UsageConflict } from '../../dsh-us
 import { createCopyCleaner, installCheckpointPolicy, readCopyUsage } from './copies.js';
 import { installSessionRelease } from './session-release.js';
 import { access } from 'node:fs/promises';
+import { registerPluginUpdates } from '../../dsh-usage-stats/src/plugin-updates.js';
+import manifest from '../package.json' with { type: 'json' };
 export const name='dsh-archive-manager-local';
 export const inject=['webServer','workspaceRegistry','sessionQuery','storageDomain','sessionController','sessionPersistence','sessions','sessionProjectionCache','agents'];
 export const API='/api/dsh-archive-manager-local';
@@ -85,6 +87,19 @@ export async function apply(ctx,config={}) {
     notifyRestored:id=>publishStoredSessions(new Set([id]))});
   ctx.effect(()=>installVisibility(ctx.sessionController.listState,manager.deleted),'archive-manager list visibility');
   ctx.effect(()=>installCheckpointPolicy(ctx.sessionProjectionCache,manager.deleted),'archive-manager checkpoint cleanup');
+  let archiveWrites = 0;
+  let updating = false;
+  registerPluginUpdates(ctx, { name, version: manifest.version, claimUpdate() {
+    if (archiveWrites) return null;
+    updating = true;
+    return () => { updating = false; };
+  } });
+  async function writeArchive(operation) {
+    if (updating) throw new RequestError('插件正在更新，请稍后重试', 409);
+    archiveWrites++;
+    try { return await operation(); }
+    finally { archiveWrites--; }
+  }
   for(const action of ['list','prepare','commit','progress','restore'])ctx.effect(()=>ctx.webServer.register({kind:'exact',path:`${API}/${action}`,handler:async(req,res)=>{
     const send=(status,value)=>{res.writeHead(status,{'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff'});res.end(JSON.stringify(value));};
     try{
@@ -96,8 +111,8 @@ export async function apply(ctx,config={}) {
       if(action==='list')result=await manager.list({subagents:new URL(req.url,'http://localhost').searchParams.get('subagents')==='1'});
       else if(action==='progress')result=manager.progress(new URL(req.url,'http://localhost').searchParams.get('token'));
       else if(action==='prepare')result=await manager.prepare(body);
-      else if(action==='commit'){if(typeof body.token!=='string')throw new RequestError('缺少确认凭据');result=await manager.commit(body.token,body.confirmed);}
-      else {if(typeof body.fromDeleted!=='boolean')throw new RequestError('恢复范围无效');result=await manager.restore(body.ids,body.fromDeleted);}
+      else if(action==='commit'){if(typeof body.token!=='string')throw new RequestError('缺少确认凭据');result=await writeArchive(()=>manager.commit(body.token,body.confirmed));}
+      else {if(typeof body.fromDeleted!=='boolean')throw new RequestError('恢复范围无效');result=await writeArchive(()=>manager.restore(body.ids,body.fromDeleted));}
       send(200,result);
     }catch(error){send(error.status??500,{error:error instanceof RequestError?error.message:'读取或保存归档失败，请重试。'});}
   }}),'archive-manager '+action);

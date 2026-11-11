@@ -73,7 +73,7 @@ test('同源只读路由：拒绝外部地址、跨站来源和无标头请求',
 });
 test('插件路由和持久化生命周期可卸载',async()=>{
  const storage=storageFixture();const cleanups=[];let route,disposed=false;
- await apply({storageDomain:storage.facility,sessionPersistence:{list:async()=>[]},effect:f=>{cleanups.push(f());},webServer:{register:r=>{route=r;return()=>{disposed=true;};}}});
+ await apply({storageDomain:storage.facility,sessionPersistence:{list:async()=>[]},inject(){},effect:f=>{cleanups.push(f());},webServer:{register:r=>{route=r;return()=>{disposed=true;};}}});
  assert.equal(route.kind,'exact');assert.equal(route.path,'/api/dsh-usage-stats-local/snapshot');
  for(const cleanup of cleanups.reverse())await cleanup();assert.ok(disposed);assert.equal(storage.closed(),1);
 });

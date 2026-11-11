@@ -1,6 +1,8 @@
-# DSH 归档管理 2.3.0
+# DSH 归档管理 2.4.0
 
 目标宿主为 DeepSeek Harness 0.2.2-rc.1。
+
+从 npm 安装并启用 `dsh-archive-manager-local@2.4.0` 后，可在「插件 → 已安装插件」打开插件详情，选择「检查并更新」或开启「自动更新」。正在执行删除或恢复时会暂缓安装，待归档操作结束后可再次检查。
 
 ## 使用
 
@@ -43,7 +45,7 @@ backupScanRoots:
 
 ## 安装与更新
 
-本机 desktop profile 使用安装包。构建后运行 `install.ps1` 安装 `dist/dsh-archive-manager-local-2.3.0.tgz`，再完全退出并重新打开 DSH。
+本地开发时运行 `install.ps1` 安装 `dist/dsh-archive-manager-local-2.4.0.tgz`，再完全退出并重新打开 DSH。
 
 ```powershell
 npm ci --ignore-scripts

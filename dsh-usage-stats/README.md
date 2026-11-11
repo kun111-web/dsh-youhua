@@ -1,4 +1,4 @@
-# DSH 使用统计 1.2.4
+# DSH 使用统计 1.3.0
 
 项目实现与维护说明见 [项目说明.md](项目说明.md)，工作区导航见 [总说明](../README.md)。
 
@@ -21,6 +21,8 @@
 
 当前目标版本：**DeepSeek Harness Desktop 0.2.2-rc.1**。已在相同版本的独立测试 profile 验证。其他 DSH 版本没有宣称兼容。
 
+从 npm 安装并启用 `dsh-usage-stats-local@1.3.0` 后，点击「插件 → 已安装插件 → 使用统计插件详情 → 检查并更新」。开启详情页的「自动更新」后，DSH 会在运行期间定期检查并安装兼容的 npm 正式版。需要重启时会显示提示。
+
 本机日常 desktop profile 使用 `.tgz` 安装包。首次安装或更新时，在 PowerShell 运行安装脚本。
 
 ```powershell
@@ -30,7 +32,7 @@
 或使用桌面版自带命令直接安装已构建的包：
 
 ```powershell
-& 'D:\deepseek\resources\runtime\cli\bin\dsh.cmd' plugin --profile desktop add 'F:\dsh-youhua\dsh-usage-stats\dist\dsh-usage-stats-local-1.2.4.tgz'
+& 'D:\deepseek\resources\runtime\cli\bin\dsh.cmd' plugin --profile desktop add 'F:\dsh-youhua\dsh-usage-stats\dist\dsh-usage-stats-local-1.3.0.tgz'
 ```
 
 然后完全退出并重新打开 DSH，在设置左侧点击「使用统计」。此插件不修改主程序 app.asar。
@@ -75,7 +77,7 @@ $env:DSH_HOME = 'F:\dsh-youhua\dsh-usage-stats\.sandbox\home'
 - 会话摘要按 revision 更新并持久化到 storages/usage_stats_local/，源日志消失后仍保留摘要。宿主启动和每 30 秒会更新，无需打开统计页。读取和汇总在共享写队列之外完成，写入前会核对 revision 和最新摘要。
 - 台账、当前会话集合和统计日期均未变化时，刷新复用已算好的汇总。删除前写入的用量会使汇总失效，下次刷新会使用最新台账。
 - 有效用量事件以指纹核对。旧前缀可以沿用现有摘要。日志与已保存记录出现分歧时，页面保留已有用量并报告受影响的会话数。旧格式摘要按已有日期、模型和分项核对，可核对的日志会补上指纹。
-- 配合归档管理 2.3.0，彻底删除前核对主日志和登记的备份，并保存可核对的最终总量及明细。主日志或副本含异常用量时会暂停清理当前会话。手工或其他程序直接删文件只能保留最后一次成功保存的用量。
+- 配合归档管理，彻底删除前核对主日志和登记的备份，并保存可核对的最终总量及明细。主日志或副本含异常用量时会暂停清理当前会话。手工或其他程序直接删文件只能保留最后一次成功保存的用量。
 - 个别会话无法读取时显示「统计不完整」，不静默伪装为完整总额。导出只包含汇总，不含聊天正文。
 - 访问入口限制为本机回环、同源、GET 和专用请求头。远程访问 DSH 时本插件不提供统计。
 
