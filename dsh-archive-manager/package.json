@@ -1,7 +1,7 @@
 {
   "name": "dsh-archive-manager-local",
-  "version": "2.4.1",
-  "description": "v2.4.1 · DSH 归档管理，完全退出 DSH 后安装 npm 更新",
+  "version": "2.4.2",
+  "description": "v2.4.2 · DSH 归档管理，完全退出 DSH 后安装 npm 更新",
   "type": "module",
   "main": "lib/index.js",
   "exports": {
@@ -21,7 +21,7 @@
   "license": "Apache-2.0",
   "engines": {
     "node": ">=24",
-    "dsh": "0.2.2-rc.1"
+    "dsh": "0.2.2-rc.1 || 0.2.2-rc.2"
   },
   "dsh": {
     "bundle": {

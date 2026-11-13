@@ -1,4 +1,4 @@
-// DSH 0.2.2-rc.1 exposes the viewing actions on UiWorkspaceService.
+// DSH exposes the viewing actions on UiWorkspaceService.
 // Lock the existing store to its normal (unarchived) mode, including a
 // previously persisted 'only' filter and archive-toast shortcuts.
 export function installSidebarPolicy(view) {

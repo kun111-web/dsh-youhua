@@ -63,8 +63,9 @@ export async function collectUpdates(profile, hostVersion, fetchLatest) {
     const installed = await installedManifest(profile, name);
     if (installed?.name !== name || installed.version !== plan.from) continue;
     const meta = await fetchLatest(name);
+    const supportedHosts = meta.engines?.dsh;
     if (meta.name !== name || meta.version !== plan.target || meta.deprecated || !meta.dsh?.bundle ||
-        meta.engines?.dsh !== hostVersion) continue;
+        typeof supportedHosts !== 'string' || !supportedHosts.split('||').some(version => version.trim() === hostVersion)) continue;
     updates.push({ name, file, target: plan.target, id: plan.id });
   }
   return updates;

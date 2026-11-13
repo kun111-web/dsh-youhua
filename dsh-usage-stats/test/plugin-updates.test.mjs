@@ -163,6 +163,15 @@ test('worker revalidates npm source, compatibility and preferences before instal
     assert.deepEqual(await collectUpdates(dir, host, lookup), []);
     await save(preferenceFile(dir, name), true);
     assert.deepEqual((await collectUpdates(dir, host, lookup)).map(row => row.target), [latest.version]);
+    meta.engines.dsh = '0.2.2-rc.1 || 0.2.2-rc.2';
+    assert.deepEqual((await collectUpdates(dir, host, lookup)).map(row => row.target), [latest.version]);
+    const newHost = '0.2.2-rc.2';
+    await save(file, { ...plan, host: newHost });
+    assert.deepEqual((await collectUpdates(dir, newHost, lookup)).map(row => row.target), [latest.version]);
+    meta.engines.dsh = host;
+    assert.deepEqual(await collectUpdates(dir, newHost, lookup), []);
+    meta.engines.dsh = '0.2.2-rc.1 || 0.2.2-rc.2';
+    await save(file, plan);
     meta.version = '1.5.0';
     assert.deepEqual(await collectUpdates(dir, host, lookup), []);
     meta.version = latest.version;

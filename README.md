@@ -1,6 +1,6 @@
 # DSH 本地插件工作区说明
 
-更新日期：2026-11-11。
+更新日期：2026-11-13。
 
 GitHub 主仓库为 [kun111-web/dsh-youhua](https://github.com/kun111-web/dsh-youhua)，默认分支为 `main`。
 
@@ -10,18 +10,18 @@ GitHub 主仓库为 [kun111-web/dsh-youhua](https://github.com/kun111-web/dsh-yo
 
 | 项目 | 包名与当前版本 | DSH 入口 | 主要用途 |
 | --- | --- | --- | --- |
-| [使用统计项目说明](dsh-usage-stats/项目说明.md) | [`dsh-usage-stats-local` 1.3.1](https://www.npmjs.com/package/dsh-usage-stats-local/v/1.3.1) | 设置 → 使用统计 | 本机会话 Token 总量与四项明细、活动热力图、模型趋势与占比 |
-| [归档管理项目说明](dsh-archive-manager/项目说明.md) | [`dsh-archive-manager-local` 2.4.1](https://www.npmjs.com/package/dsh-archive-manager-local/v/2.4.1) | 对话顶部、侧栏会话菜单、设置 → 归档管理 | 停止后直接删除，支持筛选删除、清理进度、子智能体清理和中断后续删 |
+| [使用统计项目说明](dsh-usage-stats/项目说明.md) | [`dsh-usage-stats-local` 1.3.2](https://www.npmjs.com/package/dsh-usage-stats-local/v/1.3.2) | 设置 → 使用统计 | 本机会话 Token 总量与四项明细、活动热力图、模型趋势与占比 |
+| [归档管理项目说明](dsh-archive-manager/项目说明.md) | [`dsh-archive-manager-local` 2.4.2](https://www.npmjs.com/package/dsh-archive-manager-local/v/2.4.2) | 对话顶部、侧栏会话菜单、设置 → 归档管理 | 停止后直接删除，支持筛选删除、清理进度、子智能体清理和中断后续删 |
 
 两个项目可以分别构建、安装和卸载，不要求同时启用。工作区根目录没有统一的 npm 工程，开发命令应在对应插件文件夹执行。
 
 ## 从 npm 下载安装
 
-以下版本适配 **DeepSeek Harness 0.2.2-rc.1**。在 DSH 桌面端打开「插件 → 添加插件」，选择 npm 官方源（`https://registry.npmjs.org/`），粘贴所需插件的包名和版本，然后确认安装。
+以下 npm 版本适配 **DeepSeek Harness 0.2.2-rc.1 和 0.2.2-rc.2**。在 DSH 桌面端打开「插件 → 添加插件」，选择 npm 官方源（`https://registry.npmjs.org/`），粘贴所需插件的包名和版本，然后确认安装。
 
 ```text
-dsh-usage-stats-local@1.3.1
-dsh-archive-manager-local@2.4.1
+dsh-usage-stats-local@1.3.2
+dsh-archive-manager-local@2.4.2
 ```
 
 两个插件可以单独安装。需要安装两个时，分别提交上面的两条包名。安装后完全退出并重新打开 DSH，在已安装插件列表核对版本。
@@ -65,7 +65,7 @@ F:\dsh-youhua\
 
 ## 本机环境与安装状态
 
-当前适配和验证的宿主版本是 **DeepSeek Harness 0.2.2-rc.1**；开发需要 Node.js 24 或更新版本。宿主升级后需要重新检查插件接口，尤其是归档管理的内部兼容接口。
+本机桌面端为 **DeepSeek Harness 0.2.2-rc.2**。使用统计 1.3.2 和归档管理 2.4.2 已在 **0.2.2-rc.1** 和 **0.2.2-rc.2** 的隔离宿主验证。开发需要 Node.js 24 或更新版本。宿主升级后需要重新检查插件接口，尤其是归档管理的内部兼容接口。
 
 | 用途 | 本机路径 |
 | --- | --- |
@@ -78,6 +78,11 @@ F:\dsh-youhua\
 2026-11-10 已将两个插件从工作区目录链接切换为 `.tgz` 安装。运行文件位于 `C:\Users\ASUS\.dsh\profiles\desktop\node_modules\` 下各自的插件目录，不再链接工作区；工作区完整保留，没有在 DSH 下额外保存安装包备份。已核对安装文件与当前构建一致、插件入口可独立导入、用量记录未变。
 
 在本工作区开发和验证插件时，首次安装或更新到本机 DSH 桌面配置都要使用带版本号的 `.tgz`。可在 DSH「添加插件」对话框顶部填写 `.tgz` 文件的完整路径，也可运行对应的 `install.ps1`。
+
+```powershell
+& 'F:\dsh-youhua\dsh-usage-stats\install.ps1'
+& 'F:\dsh-youhua\dsh-archive-manager\install.ps1'
+```
 
 ## 更新与交付
 
@@ -103,7 +108,7 @@ node scripts/release.mjs
 
 脚本核对包内版本和运行文件，将安装包写入各自的 `dist/` 并更新 `SHA256SUMS.txt`。已有同版本包内容有差异时会要求升版。各插件的 `npm run pack:plugin` 仍可单独用于开发打包。
 
-当前安装包为使用统计 1.3.1、归档管理 2.4.1。旧版本安装包保留为历史文件。
+当前安装包为使用统计 1.3.2、归档管理 2.4.2。旧版本安装包保留为历史文件。
 
 ## 同步到 GitHub
 
@@ -125,7 +130,7 @@ node scripts/release.mjs
 
 | 项目 | 已有验证证据 | 查看位置 |
 | --- | --- | --- |
-| 使用统计 | 26 项自动测试，覆盖汇总复用、删除前写入和跨日刷新 | 本机 `dsh-usage-stats/qa/验证记录.md` |
+| 使用统计 | 33 项自动测试，覆盖汇总复用、删除前写入、跨日刷新和插件更新 | 本机 `dsh-usage-stats/qa/验证记录.md` |
 | 归档管理 | 46 项自动测试，覆盖备份目录掉线、批量进度、目录复用和新增副本保护 | 本机 `dsh-archive-manager/qa/验证记录.md` |
 
 2026-11-09 15:54:11，用户在日常 DSH 执行两条会话的彻底删除；随后只读检查确认两条记录均有 `purgedAt` 完成标记，原日志不存在，会话目录为空，项目目录仍存在。这与开发阶段的隔离测试分开记录。

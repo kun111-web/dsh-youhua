@@ -41,7 +41,7 @@ async function reconcileSearch(query) {
 export async function apply(ctx,config={}) {
   const usage = await acquireLedger(ctx.storageDomain);
   ctx.effect(()=>()=>usage.release(),'archive-manager usage ledger');
-  if(typeof ctx.workspaceRegistry.enqueueOperation!=='function')throw new Error('归档管理仅支持 DSH 0.2.2-rc.1');
+  if(typeof ctx.workspaceRegistry.enqueueOperation!=='function')throw new Error('不兼容的 DSH 会话操作队列接口');
   const domain=await ctx.storageDomain.open({name:'archive_manager_local',version:1,layout:'single',tables:{
     deleted:{valueSchema:z.object({deletedAt:z.number().finite().nonnegative(),purgedAt:z.number().finite().nonnegative().optional(),purgePending:z.boolean().optional(),cleanupVersion:z.number().optional(),parentSession:z.string().optional()})},
     continuations:{valueSchema:z.object({title:z.string(),firstId:z.string().optional()})},

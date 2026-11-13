@@ -7,6 +7,7 @@ import path from 'node:path';
 import { DatabaseSync } from 'node:sqlite';
 
 const root = path.resolve(import.meta.dirname, '..');
+const hostRoot = process.env.DSH_QA_INSTALL_DIR ?? 'D:/deepseek';
 const tempRoot = await realpath(tmpdir());
 const home = await mkdtemp(path.join(tempRoot, 'dsh-live-archive-'));
 const profile = path.join(home, 'profiles', 'web');
@@ -165,7 +166,7 @@ await writeFile(path.join(profile, 'package.json'), JSON.stringify({ name: 'dsh-
 await writeFile(path.join(profile, 'cordis.yml'), '[]\n');
 await writeFile(path.join(profile, 'cordis.patch.yml'), `- id: session-query-sqlite\n  config:\n    path: ${JSON.stringify(searchPath)}\n    openAt: first-search\n`);
 
-const child = spawn('D:/deepseek/DeepSeek Harness.exe', ['--expose-internals', 'D:/deepseek/resources/app.asar/dsh/node_modules/@deepseek-ai/dsh-desktop-host/lib/cli.js', 'web', '--port', String(port), '--no-open'], {
+const child = spawn(path.join(hostRoot, 'DeepSeek Harness.exe'), ['--expose-internals', path.join(hostRoot, 'resources/app.asar/dsh/node_modules/@deepseek-ai/dsh-desktop-host/lib/cli.js'), 'web', '--port', String(port), '--no-open'], {
   env: { ...process.env, ELECTRON_RUN_AS_NODE: '1', DSH_HOME: home }, windowsHide: true, stdio: ['ignore', 'pipe', 'pipe'],
 });
 let diagnostics = '';

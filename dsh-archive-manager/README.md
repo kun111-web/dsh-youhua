@@ -1,8 +1,8 @@
-# DSH 归档管理 2.4.1
+# DSH 归档管理 2.4.2
 
-目标宿主为 DeepSeek Harness 0.2.2-rc.1。
+支持 DeepSeek Harness 0.2.2-rc.1 和 0.2.2-rc.2。两个版本均通过隔离宿主验证。
 
-在 Windows 版 DSH 从 npm 安装并启用 `dsh-archive-manager-local@2.4.1` 后，可在「插件 → 已安装插件」打开插件详情，选择「检查并安排更新」或开启「自动更新」。待更新版本在 DSH 完全退出后安装。
+在 Windows 版 DSH 从 npm 安装并启用插件后，可在「插件 → 已安装插件」打开插件详情，选择「检查并安排更新」或开启「自动更新」。待更新版本在 DSH 完全退出后安装。升级到 DSH 0.2.2-rc.2 后，可用下方的 2.4.2 安装包恢复加载。
 
 ## 使用
 
@@ -45,7 +45,7 @@ backupScanRoots:
 
 ## 安装与更新
 
-本地开发时运行 `install.ps1` 安装 `dist/dsh-archive-manager-local-2.4.1.tgz`，再完全退出并重新打开 DSH。
+运行 `install.ps1` 安装 `dist/dsh-archive-manager-local-2.4.2.tgz`，再完全退出并重新打开 DSH。
 
 ```powershell
 npm ci --ignore-scripts

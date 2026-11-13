@@ -8,6 +8,7 @@ import assert from 'node:assert/strict';
 import { randomUUID } from 'node:crypto';
 
 const root = path.resolve(import.meta.dirname, '..');
+const hostRoot = process.env.DSH_QA_INSTALL_DIR ?? 'D:/deepseek';
 const home = path.join(root, '.sandbox', 'purge-tests', 'retention-' + randomUUID());
 const profile = path.join(home, 'profiles', 'web');
 const base = 'http://127.0.0.1:19422';
@@ -81,7 +82,7 @@ await writeFile(path.join(profile, 'cordis.patch.yml'), '[]\n');
 let child, log;
 async function start() {
   log = createWriteStream(path.join(home, 'host.log'), { flags: 'a' });
-  child = spawn('D:/deepseek/DeepSeek Harness.exe', ['--expose-internals', 'D:/deepseek/resources/app.asar/dsh/node_modules/@deepseek-ai/dsh-desktop-host/lib/cli.js', 'web', '--port', '19422', '--no-open'], {
+  child = spawn(path.join(hostRoot, 'DeepSeek Harness.exe'), ['--expose-internals', path.join(hostRoot, 'resources/app.asar/dsh/node_modules/@deepseek-ai/dsh-desktop-host/lib/cli.js'), 'web', '--port', '19422', '--no-open'], {
     env: { ...process.env, ELECTRON_RUN_AS_NODE: '1', DSH_HOME: home }, windowsHide: true, stdio: ['ignore', 'pipe', 'pipe'],
   });
   child.stdout.pipe(log, { end: false }); child.stderr.pipe(log, { end: false });
