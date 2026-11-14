@@ -8,8 +8,8 @@
 
 | 项目 | 包名与当前版本 | DSH 入口 | 主要用途 |
 | --- | --- | --- | --- |
-| [使用统计项目说明](dsh-usage-stats/项目说明.md) | `dsh-usage-stats-local` 1.3.4 | 设置 → 使用统计 | 本机会话 Token 总量与四项明细、活动热力图、模型趋势与占比 |
-| [归档管理项目说明](dsh-archive-manager/项目说明.md) | `dsh-archive-manager-local` 2.4.4 | 对话顶部、侧栏会话菜单、设置 → 归档管理 | 停止后直接删除，支持筛选删除、清理进度、子智能体清理和中断后续删 |
+| [使用统计项目说明](dsh-usage-stats/项目说明.md) | `dsh-usage-stats-local` 1.3.5 | 设置 → 使用统计 | 本机会话 Token 总量与四项明细、活动热力图、模型趋势与占比 |
+| [归档管理项目说明](dsh-archive-manager/项目说明.md) | `dsh-archive-manager-local` 2.4.5 | 对话顶部、侧栏会话菜单、设置 → 归档管理 | 停止后直接删除，支持筛选删除、清理进度、子智能体清理和中断后续删 |
 
 各项目可以分别构建、安装和卸载。工作区根目录没有统一的 npm 工程，开发命令应在对应插件文件夹执行。
 
@@ -17,10 +17,12 @@
 
 **本仓库的两个插件通过 GitHub Releases 公开发布和更新。** 原先发布到 npm 的版本已下架。
 
+每个插件只保留自己的最新版 Release。新版发布后，先从公开链接下载安装包并核对 SHA-256，再删除同一插件的旧 Release。历史 Git 标签全部保留。具体步骤见 [公开发布规则](AGENTS.md#公开发布)。
+
 在 DSH 桌面端打开「插件 → 添加插件」，在顶部粘贴所需 `.tgz` 的下载地址。也可以先下载 `.tgz`，再填写该文件的完整路径进行离线安装。
 
-- [下载使用统计 1.3.4](https://github.com/kun111-web/dsh-youhua/releases/download/dsh-usage-stats-local-v1.3.4/dsh-usage-stats-local-1.3.4.tgz)
-- [下载归档管理 2.4.4](https://github.com/kun111-web/dsh-youhua/releases/download/dsh-archive-manager-local-v2.4.4/dsh-archive-manager-local-2.4.4.tgz)
+- [下载使用统计 1.3.5](https://github.com/kun111-web/dsh-youhua/releases/download/dsh-usage-stats-local-v1.3.5/dsh-usage-stats-local-1.3.5.tgz)
+- [下载归档管理 2.4.5](https://github.com/kun111-web/dsh-youhua/releases/download/dsh-archive-manager-local-v2.4.5/dsh-archive-manager-local-2.4.5.tgz)
 
 两个插件可分别安装。安装后完全退出并重新打开 DSH，在插件详情核对版本和来源。各版本的 SHA-256 校验记录随 Release 附件提供。
 
@@ -59,7 +61,7 @@ F:\dsh-youhua\
 
 ## 本机环境与安装状态
 
-2026-11-14，本机 **DeepSeek Harness 0.2.2-rc.3** 的使用统计和归档管理已切换到上述 GitHub Release 附件。已核对依赖地址、安装版本和启用状态。
+2026-11-14，本机 **DeepSeek Harness 0.2.2-rc.3** 的使用统计和归档管理已切换到 GitHub Release 安装。已核对依赖地址、安装版本和启用状态。
 
 | 用途 | 本机路径 |
 | --- | --- |
@@ -95,7 +97,7 @@ node scripts/release.mjs
 
 脚本核对包内版本和运行文件，将安装包写入各自的 `dist/` 并更新 `SHA256SUMS.txt`。已有同版本包内容有差异时会要求升版。各插件的 `npm run pack:plugin` 仍可单独用于开发打包。
 
-当前安装包为使用统计 1.3.4 和归档管理 2.4.4。历史安装包和校验记录可用于复核既有版本。
+当前安装包为使用统计 1.3.5 和归档管理 2.4.5。历史安装包和校验记录可用于复核既有版本。
 
 ## 同步到 GitHub
 

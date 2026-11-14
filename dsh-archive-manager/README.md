@@ -1,8 +1,10 @@
-# DSH 归档管理 2.4.4
+# DSH 归档管理 2.4.5
 
 支持 DeepSeek Harness 0.2.2-rc.1、rc.2 和 rc.3。
 
-从 [GitHub Release 2.4.4](https://github.com/kun111-web/dsh-youhua/releases/tag/dsh-archive-manager-local-v2.4.4) 下载 `dsh-archive-manager-local-2.4.4.tgz`。在 DSH 的「插件 → 添加插件」顶部填写完整文件路径或该附件的下载地址。升级时使用新版 Release 附件，重启 DSH 后核对版本。
+从 [GitHub Release 2.4.5](https://github.com/kun111-web/dsh-youhua/releases/tag/dsh-archive-manager-local-v2.4.5) 下载 `dsh-archive-manager-local-2.4.5.tgz`。在 DSH 的「插件 → 添加插件」顶部填写完整文件路径或该附件的下载地址。升级时使用新版 Release 附件，重启 DSH 后核对版本。
+
+归档管理只保留最新版 Release。新版发布并通过公开下载和 SHA-256 校验后，删除本插件的旧 Release，保留历史 Git 标签。具体步骤见 [公开发布规则](https://github.com/kun111-web/dsh-youhua/blob/main/AGENTS.md#公开发布)。
 
 ## 使用
 
@@ -45,7 +47,7 @@ backupScanRoots:
 
 ## 安装与更新
 
-运行 `install.ps1` 安装 `dist/dsh-archive-manager-local-2.4.4.tgz`，再完全退出并重新打开 DSH。
+运行 `install.ps1` 安装 `dist/dsh-archive-manager-local-2.4.5.tgz`，再完全退出并重新打开 DSH。
 
 ```powershell
 npm ci --ignore-scripts

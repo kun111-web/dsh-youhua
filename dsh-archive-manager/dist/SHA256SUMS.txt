@@ -15,3 +15,4 @@ f3d89882db06e2e414de02af15759e0562aee4c40cacdc33ebdd82c9a1a6db5b  dsh-archive-ma
 ebaada2799cf21aee2256e0ba6fc7ed4deb3f9d6eda938b1e2bc520cac6dd42d  dsh-archive-manager-local-2.4.2.tgz
 85276d976090be501bfe6edd5113958edba19d322745633f833d183ceae28292  dsh-archive-manager-local-2.4.3.tgz
 d8767520167f4201af328343c9a8eedeaafbcca266056e472d5793cdcace31eb  dsh-archive-manager-local-2.4.4.tgz
+8fa1c216a56a88570139e7cb03b1883baf566cf6eb8731c44b0232438b5d3f42  dsh-archive-manager-local-2.4.5.tgz

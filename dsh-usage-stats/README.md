@@ -1,4 +1,4 @@
-# DSH 使用统计 1.3.4
+# DSH 使用统计 1.3.5
 
 项目实现与维护说明见 [项目说明.md](项目说明.md)，工作区导航见 [总说明](../README.md)。
 
@@ -21,7 +21,9 @@
 
 支持 **DeepSeek Harness Desktop 0.2.2-rc.1、rc.2 和 rc.3**。
 
-从 [GitHub Release 1.3.4](https://github.com/kun111-web/dsh-youhua/releases/tag/dsh-usage-stats-local-v1.3.4) 下载 `dsh-usage-stats-local-1.3.4.tgz`。在 DSH 的「插件 → 添加插件」顶部填写完整文件路径或该附件的下载地址。升级时使用新版 Release 附件，重启 DSH 后核对版本。
+从 [GitHub Release 1.3.5](https://github.com/kun111-web/dsh-youhua/releases/tag/dsh-usage-stats-local-v1.3.5) 下载 `dsh-usage-stats-local-1.3.5.tgz`。在 DSH 的「插件 → 添加插件」顶部填写完整文件路径或该附件的下载地址。升级时使用新版 Release 附件，重启 DSH 后核对版本。
+
+使用统计只保留最新版 Release。新版发布并通过公开下载和 SHA-256 校验后，删除本插件的旧 Release，保留历史 Git 标签。具体步骤见 [公开发布规则](https://github.com/kun111-web/dsh-youhua/blob/main/AGENTS.md#公开发布)。
 
 本机日常 desktop profile 使用 `.tgz` 安装包。首次安装或更新时，在 PowerShell 运行安装脚本。
 
@@ -32,7 +34,7 @@
 或使用桌面版自带命令直接安装已构建的包：
 
 ```powershell
-& 'D:\deepseek\resources\runtime\cli\bin\dsh.cmd' plugin --profile desktop add 'F:\dsh-youhua\dsh-usage-stats\dist\dsh-usage-stats-local-1.3.4.tgz'
+& 'D:\deepseek\resources\runtime\cli\bin\dsh.cmd' plugin --profile desktop add 'F:\dsh-youhua\dsh-usage-stats\dist\dsh-usage-stats-local-1.3.5.tgz'
 ```
 
 然后完全退出并重新打开 DSH，在设置左侧点击「使用统计」。此插件不修改主程序 app.asar。
