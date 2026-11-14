@@ -18,44 +18,19 @@ GitHub 主仓库为 [kun111-web/dsh-youhua](https://github.com/kun111-web/dsh-yo
 
 ## 从 GitHub 下载安装
 
-在 DSH 桌面端打开「插件 → 添加插件」，在顶部粘贴所需 `.tgz` 的下载地址或下载后的完整文件路径。三个包都能下载后离线安装，动画包内含全部 20 个视频。
+**GitHub Releases 是三个插件的唯一公开下载和更新渠道。** 原先发布到 npm 的三个主包和六个动画素材包均已下架。鸣潮入场动画的安装包内含全部 20 个视频。
+
+在 DSH 桌面端打开「插件 → 添加插件」，在顶部粘贴所需 `.tgz` 的下载地址。也可以先下载 `.tgz`，再填写该文件的完整路径进行离线安装。
 
 - [下载使用统计 1.3.4](https://github.com/kun111-web/dsh-youhua/releases/download/dsh-usage-stats-local-v1.3.4/dsh-usage-stats-local-1.3.4.tgz)
 - [下载归档管理 2.4.4](https://github.com/kun111-web/dsh-youhua/releases/download/dsh-archive-manager-local-v2.4.4/dsh-archive-manager-local-2.4.4.tgz)
 - [下载鸣潮入场动画 0.4.7](https://github.com/kun111-web/dsh-wuthering-waves-intro/releases/download/dsh-wuthering-waves-intro-v0.4.7/dsh-wuthering-waves-intro-0.4.7.tgz)
 
-三个插件可分别安装。安装后完全退出并重新打开 DSH，在已安装插件列表核对版本。
-
-### 从本机自定义地址安装开发版本
-
-在 PowerShell 启动本地安装源：
-
-```powershell
-node 'F:\dsh-youhua\scripts\local-registry.mjs'
-```
-
-在 DSH 中打开「插件 → 添加插件 → 安装源 → 自定义地址」，填写 `http://127.0.0.1:4873/`。在顶部输入一个要安装的插件：
-
-```text
-dsh-usage-stats-local@1.3.4
-dsh-archive-manager-local@2.4.4
-dsh-wuthering-waves-intro@0.4.7
-```
-
-将本机源用于开发配置时，可以按包名安装。日常配置同时装有 npm 官方源插件时，建议在顶部直接粘贴开发包的 `.tgz` 地址，并让「安装源」保持 npm 官方源。这样 DSH 会保留开发包的下载地址，其他 npm 包仍能按官方源解析。按包名从自定义源安装的开发包，切回官方源后，pnpm 可能找不到尚未公开发布的版本。
-
-```text
-http://127.0.0.1:4873/dsh-usage-stats-local/-/dsh-usage-stats-local-1.3.4.tgz
-http://127.0.0.1:4873/dsh-archive-manager-local/-/dsh-archive-manager-local-2.4.4.tgz
-```
-
-已安装同名插件时，通过文件安装的旧版可运行对应 `install.ps1` 升级；通过 DSH 界面切换安装来源时，先卸载该插件再添加。安装后核对插件详情中的来源和版本。
-
-以后改动按版本升级流程打包并生成 SHA-256 记录。本机源会读取 `dist/` 中已校验的包，下载时保持服务运行即可。
+三个插件可分别安装。安装后完全退出并重新打开 DSH，在插件详情核对版本和来源。各版本的 SHA-256 校验记录随 Release 附件提供。
 
 ### 安装更新
 
-升级请下载新版 Release 附件，等待任务结束后安装。Windows 桌面端使用 CLI 替换旧版时，通过托盘菜单完全退出 DSH，再执行 `dsh plugin --profile desktop add '<新安装包完整路径>'`，重启后核对版本。
+升级时手动安装新版 Release 附件。Windows 桌面端通过托盘菜单完全退出 DSH 后，可执行 `dsh plugin --profile desktop add '<新版 .tgz 下载地址>'` 原位替换，再重启核对版本。使用已下载的文件时，将下载地址替换为文件的完整路径。
 
 ## 目录结构
 
@@ -88,7 +63,7 @@ F:\dsh-youhua\
 
 ## 本机环境与安装状态
 
-本机桌面端为 **DeepSeek Harness 0.2.2-rc.3**。三个当前安装包均已在 rc.3 隔离配置安装。开发需要 Node.js 24 或更新版本。宿主升级后需要重新检查插件接口，尤其是归档管理的内部兼容接口。
+2026-11-14，本机 **DeepSeek Harness 0.2.2-rc.3** 的桌面配置已切换到上述三个 GitHub Release 附件。已核对依赖地址、安装版本和启用状态。
 
 | 用途 | 本机路径 |
 | --- | --- |
@@ -99,15 +74,6 @@ F:\dsh-youhua\
 | 归档管理删除标记 | `C:\Users\ASUS\.dsh\storages\archive_manager_local.json` |
 
 2026-11-10 已将两个插件从工作区目录链接切换为 `.tgz` 安装。运行文件位于 `C:\Users\ASUS\.dsh\profiles\desktop\node_modules\` 下各自的插件目录，不再链接工作区；工作区完整保留，没有在 DSH 下额外保存安装包备份。已核对安装文件与当前构建一致、插件入口可独立导入、用量记录未变。
-
-在本工作区开发和验证插件时，首次安装或更新到本机 DSH 桌面配置都要使用带版本号的 `.tgz`。可使用上面的本地安装源，在 DSH「添加插件」对话框顶部填写 `.tgz` 文件的完整路径，或运行对应的 `install.ps1`。
-
-```powershell
-& 'F:\dsh-youhua\dsh-usage-stats\install.ps1'
-& 'F:\dsh-youhua\dsh-archive-manager\install.ps1'
-```
-
-鸣潮入场动画声明支持 **`>=0.2.2-rc.1 <0.3.0-0`**。本地安装包为 `F:\dsh-youhua\dsh-wuthering-waves-intro\dist\dsh-wuthering-waves-intro-0.4.7.tgz`。
 
 ## 更新与交付
 
@@ -122,7 +88,7 @@ npm test
 npm run build
 ```
 
-本地开发时使用安装包验证，运行对应 `install.ps1` 安装后重新启动 DSH。
+开发需要 Node.js 24 或更新版本。验证开发版本时，先生成带版本号的 `.tgz`，再用完整文件路径装入隔离配置。`node scripts/local-registry.mjs` 也可在 `127.0.0.1:4873` 提供已校验的开发包，供本机测试。宿主升级后重新检查插件接口，尤其是归档管理的内部兼容接口。
 
 发版时从工作区根目录运行发布脚本。脚本检查两个插件的版本声明、锁文件和安装路径，跑完测试再构建两个包。两个插件都内嵌同一份台账源码。
 
@@ -141,7 +107,7 @@ node scripts/release.mjs
 
 发布新版时，把对应的 `.tgz` 和 `dist/SHA256SUMS.txt` 一起提交。若新版安装包被 `dist/` 的忽略规则匹配，可用 `git add -f` 暂存对应文件。会话、隔离环境和本机 QA 产物留在本地。
 
-提交后运行 `git push origin main`，在 GitHub 的 `main` 分支核对提交和文件。
+提交后运行 `git push origin main`，在 GitHub 的 `main` 分支核对提交和文件。按 [公开发布流程](AGENTS.md#公开发布) 创建 Release，上传 `.tgz` 与 `SHA256SUMS.txt` 并核对附件。
 
 ## 两个插件的数据关系
 
