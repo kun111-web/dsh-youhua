@@ -1,10 +1,8 @@
-# DSH 本地插件工作区说明
+# DSH 使用统计与归档管理
 
 更新日期：2026-11-14。
 
-GitHub 主仓库为 [kun111-web/dsh-youhua](https://github.com/kun111-web/dsh-youhua)，默认分支为 `main`。
-
-本工作区用于开发和维护 DeepSeek Harness 的本地插件。「使用统计」和「归档管理」的功能与界面参考 ZCode 官方项目，未采用 dsh-scope。「鸣潮入场动画」为 DSH 桌面端提供可选角色的开屏动画。插件通过 DSH 扩展机制加载，不修改主程序 `app.asar`。
+本仓库维护 DeepSeek Harness 的「使用统计」和「归档管理」插件。功能与界面参考 ZCode 官方项目，两个插件均通过 DSH 扩展机制加载。
 
 ## 插件导航
 
@@ -12,37 +10,19 @@ GitHub 主仓库为 [kun111-web/dsh-youhua](https://github.com/kun111-web/dsh-yo
 | --- | --- | --- | --- |
 | [使用统计项目说明](dsh-usage-stats/项目说明.md) | `dsh-usage-stats-local` 1.3.4 | 设置 → 使用统计 | 本机会话 Token 总量与四项明细、活动热力图、模型趋势与占比 |
 | [归档管理项目说明](dsh-archive-manager/项目说明.md) | `dsh-archive-manager-local` 2.4.4 | 对话顶部、侧栏会话菜单、设置 → 归档管理 | 停止后直接删除，支持筛选删除、清理进度、子智能体清理和中断后续删 |
-| [鸣潮入场动画](https://github.com/kun111-web/dsh-wuthering-waves-intro) | `dsh-wuthering-waves-intro` 0.4.7 | 桌面启动、设置 → 鸣潮入场动画 | 20 个角色，4K/60 帧、完整/快速开场、宿主能力检测与兼容降级 |
 
 各项目可以分别构建、安装和卸载。工作区根目录没有统一的 npm 工程，开发命令应在对应插件文件夹执行。
 
 ## 从 GitHub 下载安装
 
-**GitHub 是三个插件的唯一公开分发渠道。** 三个插件均提供 Release 安装包，鸣潮入场动画也可从 GitHub 仓库安装。原先发布到 npm 的三个主包和六个动画素材包均已下架。
+**本仓库的两个插件通过 GitHub Releases 公开发布和更新。** 原先发布到 npm 的版本已下架。
 
 在 DSH 桌面端打开「插件 → 添加插件」，在顶部粘贴所需 `.tgz` 的下载地址。也可以先下载 `.tgz`，再填写该文件的完整路径进行离线安装。
 
 - [下载使用统计 1.3.4](https://github.com/kun111-web/dsh-youhua/releases/download/dsh-usage-stats-local-v1.3.4/dsh-usage-stats-local-1.3.4.tgz)
 - [下载归档管理 2.4.4](https://github.com/kun111-web/dsh-youhua/releases/download/dsh-archive-manager-local-v2.4.4/dsh-archive-manager-local-2.4.4.tgz)
-- [下载鸣潮入场动画 0.4.7](https://github.com/kun111-web/dsh-wuthering-waves-intro/releases/download/dsh-wuthering-waves-intro-v0.4.7/dsh-wuthering-waves-intro-0.4.7.tgz)
 
-三个插件可分别安装。安装后完全退出并重新打开 DSH，在插件详情核对版本和来源。各版本的 SHA-256 校验记录随 Release 附件提供。
-
-### 鸣潮入场动画固定安装地址
-
-在 DSH「插件 → 添加插件」的顶部输入框粘贴仓库地址，安装完成后启用插件。
-
-```text
-https://github.com/kun111-web/dsh-wuthering-waves-intro
-```
-
-安装时读取仓库默认分支 `main` 的当前提交，包含全部 20 个角色的视频和预览图。升级时从托盘完全退出 Windows 版 DSH，用桌面端提供的 `dsh` 命令重新安装同一个地址，再打开 DSH。
-
-```powershell
-dsh plugin --profile desktop add 'https://github.com/kun111-web/dsh-wuthering-waves-intro'
-```
-
-已在 DSH 0.2.2-rc.3 的隔离桌面配置验证仓库安装和从 0.4.4 升到 0.4.7。已安装的版本会固定到当时解析的 Git 提交，需手动执行升级。
+两个插件可分别安装。安装后完全退出并重新打开 DSH，在插件详情核对版本和来源。各版本的 SHA-256 校验记录随 Release 附件提供。
 
 ### 安装更新
 
@@ -79,7 +59,7 @@ F:\dsh-youhua\
 
 ## 本机环境与安装状态
 
-2026-11-14，本机 **DeepSeek Harness 0.2.2-rc.3** 的桌面配置已切换到上述三个 GitHub Release 附件。已核对依赖地址、安装版本和启用状态。
+2026-11-14，本机 **DeepSeek Harness 0.2.2-rc.3** 的使用统计和归档管理已切换到上述 GitHub Release 附件。已核对依赖地址、安装版本和启用状态。
 
 | 用途 | 本机路径 |
 | --- | --- |
@@ -115,7 +95,7 @@ node scripts/release.mjs
 
 脚本核对包内版本和运行文件，将安装包写入各自的 `dist/` 并更新 `SHA256SUMS.txt`。已有同版本包内容有差异时会要求升版。各插件的 `npm run pack:plugin` 仍可单独用于开发打包。
 
-当前安装包为使用统计 1.3.4、归档管理 2.4.4、鸣潮入场动画 0.4.7。鸣潮入场动画在其独立仓库运行 `npm run pack:plugin`，生成内含全部素材的安装包并校验。历史安装包和校验记录可用于复核既有版本。
+当前安装包为使用统计 1.3.4 和归档管理 2.4.4。历史安装包和校验记录可用于复核既有版本。
 
 ## 同步到 GitHub
 
@@ -139,7 +119,6 @@ node scripts/release.mjs
 | --- | --- | --- |
 | 使用统计 | 28 项自动测试，覆盖汇总复用、删除前写入、跨日刷新和 DSH 原生更新的活动检查 | 本机 `dsh-usage-stats/qa/验证记录.md` |
 | 归档管理 | 46 项自动测试，覆盖备份目录掉线、批量进度、目录复用和新增副本保护 | 本机 `dsh-archive-manager/qa/验证记录.md` |
-| 鸣潮入场动画 | 0.4.7 通过离线安装、20 个视频哈希比对、分段读取及预览校验；0.4.3 在 rc.1/rc.2 各完成 40 次角色播放 | [动画插件测试记录](https://github.com/kun111-web/dsh-wuthering-waves-intro#片段与打包) |
 
 2026-11-09 15:54:11，用户在日常 DSH 执行两条会话的彻底删除；随后只读检查确认两条记录均有 `purgedAt` 完成标记，原日志不存在，会话目录为空，项目目录仍存在。这与开发阶段的隔离测试分开记录。
 
