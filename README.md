@@ -18,7 +18,7 @@ GitHub 主仓库为 [kun111-web/dsh-youhua](https://github.com/kun111-web/dsh-yo
 
 ## 从 GitHub 下载安装
 
-**GitHub Releases 是三个插件的唯一公开下载和更新渠道。** 原先发布到 npm 的三个主包和六个动画素材包均已下架。鸣潮入场动画的安装包内含全部 20 个视频。
+**GitHub 是三个插件的唯一公开分发渠道。** 三个插件均提供 Release 安装包，鸣潮入场动画也可从 GitHub 仓库安装。原先发布到 npm 的三个主包和六个动画素材包均已下架。
 
 在 DSH 桌面端打开「插件 → 添加插件」，在顶部粘贴所需 `.tgz` 的下载地址。也可以先下载 `.tgz`，再填写该文件的完整路径进行离线安装。
 
@@ -27,6 +27,22 @@ GitHub 主仓库为 [kun111-web/dsh-youhua](https://github.com/kun111-web/dsh-yo
 - [下载鸣潮入场动画 0.4.7](https://github.com/kun111-web/dsh-wuthering-waves-intro/releases/download/dsh-wuthering-waves-intro-v0.4.7/dsh-wuthering-waves-intro-0.4.7.tgz)
 
 三个插件可分别安装。安装后完全退出并重新打开 DSH，在插件详情核对版本和来源。各版本的 SHA-256 校验记录随 Release 附件提供。
+
+### 鸣潮入场动画固定安装地址
+
+在 DSH「插件 → 添加插件」的顶部输入框粘贴仓库地址，安装完成后启用插件。
+
+```text
+https://github.com/kun111-web/dsh-wuthering-waves-intro
+```
+
+安装时读取仓库默认分支 `main` 的当前提交，包含全部 20 个角色的视频和预览图。升级时从托盘完全退出 Windows 版 DSH，用桌面端提供的 `dsh` 命令重新安装同一个地址，再打开 DSH。
+
+```powershell
+dsh plugin --profile desktop add 'https://github.com/kun111-web/dsh-wuthering-waves-intro'
+```
+
+已在 DSH 0.2.2-rc.3 的隔离桌面配置验证仓库安装和从 0.4.4 升到 0.4.7。已安装的版本会固定到当时解析的 Git 提交，需手动执行升级。
 
 ### 安装更新
 
