@@ -29,4 +29,5 @@ GitHub Releases 是本仓库插件的唯一公开分发渠道。停止向 npm �
 1. 使用统计和归档管理发布到 `kun111-web/dsh-youhua`。
 2. 确认发版提交已推送到 GitHub 后，为每个发版插件直接在 GitHub 创建标签和 Release。标签采用 `<包名>-v<版本号>`，并指向包含该版本源码、安装包和校验记录的发版提交。可用 `gh release create` 的 `--target` 指定完整提交 SHA，由 GitHub 创建远程标签。
 3. 每个 Release 上传通过测试和校验的版本化 `.tgz` 及对应的 `SHA256SUMS.txt`。发布说明注明「本插件参考 ZCode 源码进行优化，并适配 DeepSeek Harness（DSH）」。
-4. 发布后核对 GitHub 标签指向的提交，以及 Release 附件的文件名和 SHA-256，确保与工作区 `dist/SHA256SUMS.txt` 一致。
+4. 发布后核对 GitHub 标签指向的提交，从公开下载地址下载新版 `.tgz` 和 `SHA256SUMS.txt`，核对附件文件名，并确认安装包的 SHA-256 与下载的校验记录及工作区 `dist/SHA256SUMS.txt` 一致。
+5. 每个插件只保留最新版 Release。新版通过下载和校验后，按 `<包名>-v<版本号>` 识别并删除同一插件的旧 Release，保留所有 Git 标签。使用 `gh release delete` 时省略 `--cleanup-tag`。最后核对 Releases 列表和历史标签。
