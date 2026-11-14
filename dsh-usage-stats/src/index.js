@@ -1,7 +1,6 @@
 import { createCollector } from './collector.js';
 import { acquireLedger } from './ledger.js';
-import { registerPluginUpdates } from './plugin-updates.js';
-import manifest from '../package.json' with { type: 'json' };
+import { registerUpdateAdmission } from './plugin-update-admission.js';
 export const name = 'dsh-usage-stats-local';
 export const inject = ['webServer', 'sessionPersistence', 'storageDomain'];
 export const API_PATH = '/api/dsh-usage-stats-local/snapshot';
@@ -42,5 +41,7 @@ export async function apply(ctx) {
       collect().then(value => send(200, value)).catch(() => send(500, { ok: false, error: '读取或保存用量统计失败，请检查 DSH 日志后重试。' }));
     }
   }), 'usage statistics: read-only snapshot');
-  registerPluginUpdates(ctx, { name, version: manifest.version });
+  ctx.inject(['pluginManager'], scope => {
+    scope.effect(() => registerUpdateAdmission(scope.pluginManager, name, scope), name + ': update admission');
+  });
 }

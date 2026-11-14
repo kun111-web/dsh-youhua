@@ -5,8 +5,7 @@ import { acquireLedger, preserveSessionUsage, UsageConflict } from '../../dsh-us
 import { createCopyCleaner, installCheckpointPolicy, readCopyUsage } from './copies.js';
 import { installSessionRelease } from './session-release.js';
 import { access } from 'node:fs/promises';
-import { registerPluginUpdates } from '../../dsh-usage-stats/src/plugin-updates.js';
-import manifest from '../package.json' with { type: 'json' };
+import { registerUpdateAdmission } from '../../dsh-usage-stats/src/plugin-update-admission.js';
 export const name='dsh-archive-manager-local';
 export const inject=['webServer','workspaceRegistry','sessionQuery','storageDomain','sessionController','sessionPersistence','sessions','sessionProjectionCache','agents'];
 export const API='/api/dsh-archive-manager-local';
@@ -89,11 +88,13 @@ export async function apply(ctx,config={}) {
   ctx.effect(()=>installCheckpointPolicy(ctx.sessionProjectionCache,manager.deleted),'archive-manager checkpoint cleanup');
   let archiveWrites = 0;
   let updating = false;
-  registerPluginUpdates(ctx, { name, version: manifest.version, claimUpdate() {
-    if (archiveWrites || updating) return null;
-    updating = true;
-    return () => { updating = false; };
-  } });
+  ctx.inject(['pluginManager'], scope => {
+    scope.effect(() => registerUpdateAdmission(scope.pluginManager, name, scope, () => {
+      if (archiveWrites || updating) return null;
+      updating = true;
+      return () => { updating = false; };
+    }), name + ': update admission');
+  });
   async function writeArchive(operation) {
     if (updating) throw new RequestError('插件正在更新，请稍后重试', 409);
     archiveWrites++;

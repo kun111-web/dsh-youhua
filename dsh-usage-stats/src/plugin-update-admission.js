@@ -1,5 +1,6 @@
 import { AsyncLocalStorage } from 'node:async_hooks';
-import { pluginNames } from './update-on-exit.mjs';
+
+const pluginNames = ['dsh-usage-stats-local', 'dsh-archive-manager-local'];
 
 const key = Symbol.for('dsh-local.plugin-update-admission.v1');
 const installed = globalThis[key] ??= new WeakMap();

@@ -1,38 +1,61 @@
 # DSH 本地插件工作区说明
 
-更新日期：2026-11-13。
+更新日期：2026-11-14。
 
 GitHub 主仓库为 [kun111-web/dsh-youhua](https://github.com/kun111-web/dsh-youhua)，默认分支为 `main`。
 
-本工作区用于开发和维护 DeepSeek Harness 的本地插件。目前包含「使用统计」和「归档管理」两个独立项目，功能和界面参考 ZCode 官方项目，没有采用 dsh-scope。插件通过 DSH 扩展机制加载，不修改主程序 `app.asar`。
+本工作区用于开发和维护 DeepSeek Harness 的本地插件。「使用统计」和「归档管理」的功能与界面参考 ZCode 官方项目，未采用 dsh-scope。「鸣潮入场动画」为 DSH 桌面端提供可选角色的开屏动画。插件通过 DSH 扩展机制加载，不修改主程序 `app.asar`。
 
 ## 插件导航
 
 | 项目 | 包名与当前版本 | DSH 入口 | 主要用途 |
 | --- | --- | --- | --- |
-| [使用统计项目说明](dsh-usage-stats/项目说明.md) | [`dsh-usage-stats-local` 1.3.2](https://www.npmjs.com/package/dsh-usage-stats-local/v/1.3.2) | 设置 → 使用统计 | 本机会话 Token 总量与四项明细、活动热力图、模型趋势与占比 |
-| [归档管理项目说明](dsh-archive-manager/项目说明.md) | [`dsh-archive-manager-local` 2.4.2](https://www.npmjs.com/package/dsh-archive-manager-local/v/2.4.2) | 对话顶部、侧栏会话菜单、设置 → 归档管理 | 停止后直接删除，支持筛选删除、清理进度、子智能体清理和中断后续删 |
+| [使用统计项目说明](dsh-usage-stats/项目说明.md) | `dsh-usage-stats-local` 1.3.4 | 设置 → 使用统计 | 本机会话 Token 总量与四项明细、活动热力图、模型趋势与占比 |
+| [归档管理项目说明](dsh-archive-manager/项目说明.md) | `dsh-archive-manager-local` 2.4.4 | 对话顶部、侧栏会话菜单、设置 → 归档管理 | 停止后直接删除，支持筛选删除、清理进度、子智能体清理和中断后续删 |
+| [鸣潮入场动画](https://github.com/kun111-web/dsh-wuthering-waves-intro) | `dsh-wuthering-waves-intro` 0.4.7 | 桌面启动、设置 → 鸣潮入场动画 | 20 个角色，4K/60 帧、完整/快速开场、宿主能力检测与兼容降级 |
 
-两个项目可以分别构建、安装和卸载，不要求同时启用。工作区根目录没有统一的 npm 工程，开发命令应在对应插件文件夹执行。
+各项目可以分别构建、安装和卸载。工作区根目录没有统一的 npm 工程，开发命令应在对应插件文件夹执行。
 
-## 从 npm 下载安装
+## 从 GitHub 下载安装
 
-以下 npm 版本适配 **DeepSeek Harness 0.2.2-rc.1 和 0.2.2-rc.2**。在 DSH 桌面端打开「插件 → 添加插件」，选择 npm 官方源（`https://registry.npmjs.org/`），粘贴所需插件的包名和版本，然后确认安装。
+在 DSH 桌面端打开「插件 → 添加插件」，在顶部粘贴所需 `.tgz` 的下载地址或下载后的完整文件路径。三个包都能下载后离线安装，动画包内含全部 20 个视频。
 
-```text
-dsh-usage-stats-local@1.3.2
-dsh-archive-manager-local@2.4.2
+- [下载使用统计 1.3.4](https://github.com/kun111-web/dsh-youhua/releases/download/dsh-usage-stats-local-v1.3.4/dsh-usage-stats-local-1.3.4.tgz)
+- [下载归档管理 2.4.4](https://github.com/kun111-web/dsh-youhua/releases/download/dsh-archive-manager-local-v2.4.4/dsh-archive-manager-local-2.4.4.tgz)
+- [下载鸣潮入场动画 0.4.7](https://github.com/kun111-web/dsh-wuthering-waves-intro/releases/download/dsh-wuthering-waves-intro-v0.4.7/dsh-wuthering-waves-intro-0.4.7.tgz)
+
+三个插件可分别安装。安装后完全退出并重新打开 DSH，在已安装插件列表核对版本。
+
+### 从本机自定义地址安装开发版本
+
+在 PowerShell 启动本地安装源：
+
+```powershell
+node 'F:\dsh-youhua\scripts\local-registry.mjs'
 ```
 
-两个插件可以单独安装。需要安装两个时，分别提交上面的两条包名。安装后完全退出并重新打开 DSH，在已安装插件列表核对版本。
+在 DSH 中打开「插件 → 添加插件 → 安装源 → 自定义地址」，填写 `http://127.0.0.1:4873/`。在顶部输入一个要安装的插件：
 
-### 检查更新
+```text
+dsh-usage-stats-local@1.3.4
+dsh-archive-manager-local@2.4.4
+dsh-wuthering-waves-intro@0.4.7
+```
 
-在 Windows 版 DSH 从 npm 安装并启用插件后，可在「插件 → 已安装插件 → 插件详情」选择「检查并安排更新」。发现兼容的 npm 正式版时记录待更新版本，等 DSH 完全退出后通过 DSH CLI 安装。Windows 上点窗口的「×」通常会隐藏到托盘，需通过托盘菜单退出 DSH。
+将本机源用于开发配置时，可以按包名安装。日常配置同时装有 npm 官方源插件时，建议在顶部直接粘贴开发包的 `.tgz` 地址，并让「安装源」保持 npm 官方源。这样 DSH 会保留开发包的下载地址，其他 npm 包仍能按官方源解析。按包名从自定义源安装的开发包，切回官方源后，pnpm 可能找不到尚未公开发布的版本。
 
-「自动更新」默认关闭，可在两个插件的详情页分别开启。开启后会立即检查，随后在 DSH 运行期间每 6 小时检查一次。只安排 npm 官方源标记为 latest 且兼容当前 DSH 的正式版。退出后会再次核对待更新版本及安装来源。若 DSH 已重新打开，待更新项保留到下次退出。已有的自动更新开关会沿用。
+```text
+http://127.0.0.1:4873/dsh-usage-stats-local/-/dsh-usage-stats-local-1.3.4.tgz
+http://127.0.0.1:4873/dsh-archive-manager-local/-/dsh-archive-manager-local-2.4.4.tgz
+```
 
-使用 DSH 自带的「版本」区手动安装时，插件会在开始改动配置前检查运行中或排队的任务，以及归档管理的删除和恢复操作。若检测到活动，会提示暂缓。
+已安装同名插件时，通过文件安装的旧版可运行对应 `install.ps1` 升级；通过 DSH 界面切换安装来源时，先卸载该插件再添加。安装后核对插件详情中的来源和版本。
+
+以后改动按版本升级流程打包并生成 SHA-256 记录。本机源会读取 `dist/` 中已校验的包，下载时保持服务运行即可。
+
+### 安装更新
+
+升级请下载新版 Release 附件，等待任务结束后安装。Windows 桌面端使用 CLI 替换旧版时，通过托盘菜单完全退出 DSH，再执行 `dsh plugin --profile desktop add '<新安装包完整路径>'`，重启后核对版本。
 
 ## 目录结构
 
@@ -65,7 +88,7 @@ F:\dsh-youhua\
 
 ## 本机环境与安装状态
 
-本机桌面端为 **DeepSeek Harness 0.2.2-rc.2**。使用统计 1.3.2 和归档管理 2.4.2 已在 **0.2.2-rc.1** 和 **0.2.2-rc.2** 的隔离宿主验证。开发需要 Node.js 24 或更新版本。宿主升级后需要重新检查插件接口，尤其是归档管理的内部兼容接口。
+本机桌面端为 **DeepSeek Harness 0.2.2-rc.3**。三个当前安装包均已在 rc.3 隔离配置安装。开发需要 Node.js 24 或更新版本。宿主升级后需要重新检查插件接口，尤其是归档管理的内部兼容接口。
 
 | 用途 | 本机路径 |
 | --- | --- |
@@ -77,12 +100,14 @@ F:\dsh-youhua\
 
 2026-11-10 已将两个插件从工作区目录链接切换为 `.tgz` 安装。运行文件位于 `C:\Users\ASUS\.dsh\profiles\desktop\node_modules\` 下各自的插件目录，不再链接工作区；工作区完整保留，没有在 DSH 下额外保存安装包备份。已核对安装文件与当前构建一致、插件入口可独立导入、用量记录未变。
 
-在本工作区开发和验证插件时，首次安装或更新到本机 DSH 桌面配置都要使用带版本号的 `.tgz`。可在 DSH「添加插件」对话框顶部填写 `.tgz` 文件的完整路径，也可运行对应的 `install.ps1`。
+在本工作区开发和验证插件时，首次安装或更新到本机 DSH 桌面配置都要使用带版本号的 `.tgz`。可使用上面的本地安装源，在 DSH「添加插件」对话框顶部填写 `.tgz` 文件的完整路径，或运行对应的 `install.ps1`。
 
 ```powershell
 & 'F:\dsh-youhua\dsh-usage-stats\install.ps1'
 & 'F:\dsh-youhua\dsh-archive-manager\install.ps1'
 ```
+
+鸣潮入场动画声明支持 **`>=0.2.2-rc.1 <0.3.0-0`**。本地安装包为 `F:\dsh-youhua\dsh-wuthering-waves-intro\dist\dsh-wuthering-waves-intro-0.4.7.tgz`。
 
 ## 更新与交付
 
@@ -97,7 +122,7 @@ npm test
 npm run build
 ```
 
-本地开发时使用安装包验证，运行对应 `install.ps1` 安装后重新启动 DSH。DSH 从 npm 安装的正式版可在插件详情页更新。
+本地开发时使用安装包验证，运行对应 `install.ps1` 安装后重新启动 DSH。
 
 发版时从工作区根目录运行发布脚本。脚本检查两个插件的版本声明、锁文件和安装路径，跑完测试再构建两个包。两个插件都内嵌同一份台账源码。
 
@@ -108,7 +133,7 @@ node scripts/release.mjs
 
 脚本核对包内版本和运行文件，将安装包写入各自的 `dist/` 并更新 `SHA256SUMS.txt`。已有同版本包内容有差异时会要求升版。各插件的 `npm run pack:plugin` 仍可单独用于开发打包。
 
-当前安装包为使用统计 1.3.2、归档管理 2.4.2。旧版本安装包保留为历史文件。
+当前安装包为使用统计 1.3.4、归档管理 2.4.4、鸣潮入场动画 0.4.7。鸣潮入场动画在其独立仓库运行 `npm run pack:plugin`，生成内含全部素材的安装包并校验。历史安装包和校验记录可用于复核既有版本。
 
 ## 同步到 GitHub
 
@@ -130,14 +155,23 @@ node scripts/release.mjs
 
 | 项目 | 已有验证证据 | 查看位置 |
 | --- | --- | --- |
-| 使用统计 | 33 项自动测试，覆盖汇总复用、删除前写入、跨日刷新和插件更新 | 本机 `dsh-usage-stats/qa/验证记录.md` |
+| 使用统计 | 28 项自动测试，覆盖汇总复用、删除前写入、跨日刷新和 DSH 原生更新的活动检查 | 本机 `dsh-usage-stats/qa/验证记录.md` |
 | 归档管理 | 46 项自动测试，覆盖备份目录掉线、批量进度、目录复用和新增副本保护 | 本机 `dsh-archive-manager/qa/验证记录.md` |
+| 鸣潮入场动画 | 0.4.7 通过离线安装、20 个视频哈希比对、分段读取及预览校验；0.4.3 在 rc.1/rc.2 各完成 40 次角色播放 | [动画插件测试记录](https://github.com/kun111-web/dsh-wuthering-waves-intro#片段与打包) |
 
 2026-11-09 15:54:11，用户在日常 DSH 执行两条会话的彻底删除；随后只读检查确认两条记录均有 `purgedAt` 完成标记，原日志不存在，会话目录为空，项目目录仍存在。这与开发阶段的隔离测试分开记录。
 
-2026-11-10 已复跑两组共 39 项自动测试，并在真实 0.2.2-rc.1 隔离宿主中验证删除前保存、删除后重启、重复提交与项目文件保留。结果见 dsh-usage-stats/qa/retention-integration.json。另从已有隔离副本补回两条先前已删除会话的 18,753,845 Token，仅代表副本时点；未恢复聊天日志。
+2026-11-10 已复跑两组共 40 项自动测试，并在真实 0.2.2-rc.1 隔离宿主中验证删除前保存、删除后重启、重复提交与项目文件保留。结果见 dsh-usage-stats/qa/retention-integration.json。另从已有隔离副本补回两条先前已删除会话的 18,753,845 Token，仅代表副本时点；未恢复聊天日志。
 
 维护时先阅读对应 `项目说明.md` 和 `README.md`。统计口径问题查看聚合与图表模型；归档删除问题查看管理服务与日志清除适配。不要直接手改日常删除标记来尝试恢复已经清除的日志。
+
+### Windows 桌面端更新故障反馈
+
+2026-11-12，本机从 DSH Desktop `0.2.2-rc.1` 更新到 `0.2.2-rc.2` 时，应用退出后停在「正在安装更新」。安装器在备份 `D:\deepseek` 时调用 `MoveFileExW`，连续 10 次收到 `ERROR_SHARING_VIOLATION (32)`，随后退出，未启动新版。
+
+在临时目录独立运行官方安装器时，观察到显示更新提示的 `rundll32.exe` 继承了安装目标作为工作目录，阻止 Windows 重命名目标目录。独立复现时 DSH 和插件均未运行。给本机添加针对该提示进程的处理后，使用同一个签名安装包在原目录复测 rc.2 的自动安装流程，安装器返回 `0`，DSH 自动重启并进入工作台。跨版本自动升级待下一版发布后验证。
+
+复现步骤、脱敏错误日志和对照结果已发到 [DSH 官方 GitHub 讨论 #12988 的回复](https://github.com/deepseek-ai/deepseek-harness/discussions/12988#discussioncomment-19562177)。
 
 ## 开源许可
 

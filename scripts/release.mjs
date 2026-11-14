@@ -51,9 +51,13 @@ async function prepare(info, stage) {
   assert.equal(manifest.name, info.name);
   assert.equal(manifest.version, info.version);
   assert.equal(manifest.description, info.description);
-  for (const file of ['lib/index.js', 'lib/client.js', 'lib/update-on-exit.mjs', 'cordis.patch.yml']) {
+  for (const field of ['dependencies', 'optionalDependencies', 'peerDependencies']) {
+    assert.deepEqual(Object.keys(manifest[field] ?? {}), [], `${info.name} 的安装包包含外部依赖：${field}`);
+  }
+  for (const file of ['lib/index.js', 'lib/client.js', 'cordis.patch.yml']) {
     assert.ok(extract(file).equals(await readFile(path.join(info.dir, file))), `${info.name} 的包内文件不一致：${file}`);
   }
+  assert.ok(!packed[0].files.some(({ path }) => path === 'lib/update-on-exit.mjs'), `${info.name} 的安装包仍包含旧版更新进程`);
 
   const checksum = hash('sha256', await readFile(archive));
   const dist = path.join(info.dir, 'dist');
