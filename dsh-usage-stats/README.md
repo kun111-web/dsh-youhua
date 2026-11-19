@@ -1,4 +1,4 @@
-# DSH 使用统计 1.3.5
+# DSH 使用统计 1.3.6
 
 项目实现与维护说明见 [项目说明.md](项目说明.md)，工作区导航见 [总说明](../README.md)。
 
@@ -21,7 +21,7 @@
 
 支持 **DeepSeek Harness Desktop 0.2.2-rc.1、rc.2 和 rc.3**。
 
-从 [GitHub Release 1.3.5](https://github.com/kun111-web/dsh-youhua/releases/tag/dsh-usage-stats-local-v1.3.5) 下载 `dsh-usage-stats-local-1.3.5.tgz`。在 DSH 的「插件 → 添加插件」顶部填写完整文件路径或该附件的下载地址。升级时使用新版 Release 附件，重启 DSH 后核对版本。
+从 [GitHub Release 1.3.6](https://github.com/kun111-web/dsh-youhua/releases/tag/dsh-usage-stats-local-v1.3.6) 下载 `dsh-usage-stats-local-1.3.6.tgz`。在 DSH 的「插件 → 添加插件」顶部填写完整文件路径或该附件的下载地址。升级时使用新版 Release 附件，重启 DSH 后核对版本。
 
 使用统计只保留最新版 Release。新版发布并通过公开下载和 SHA-256 校验后，删除本插件的旧 Release，保留历史 Git 标签。具体步骤见 [公开发布规则](https://github.com/kun111-web/dsh-youhua/blob/main/AGENTS.md#公开发布)。
 
@@ -34,7 +34,7 @@
 或使用桌面版自带命令直接安装已构建的包：
 
 ```powershell
-& 'D:\deepseek\resources\runtime\cli\bin\dsh.cmd' plugin --profile desktop add 'F:\dsh-youhua\dsh-usage-stats\dist\dsh-usage-stats-local-1.3.5.tgz'
+& 'D:\deepseek\resources\runtime\cli\bin\dsh.cmd' plugin --profile desktop add 'F:\dsh-youhua\dsh-usage-stats\dist\dsh-usage-stats-local-1.3.6.tgz'
 ```
 
 然后完全退出并重新打开 DSH，在设置左侧点击「使用统计」。此插件不修改主程序 app.asar。
@@ -72,6 +72,7 @@ $env:DSH_HOME = 'F:\dsh-youhua\dsh-usage-stats\.sandbox\home'
 
 - 汇总当前 DSH_HOME 中已保存的会话用量摘要，包含已删除会话。升级前已删除且没有摘要或可核对副本的历史无法自动补回；未持久化的流式响应和未写入 assistant/message 的调用不计入，不等同于服务商账单。
 - 以完成的 assistant/message.usage 为准，优先使用 totalTokens；缺失时累计 DSH 的输入、输出、缓存读、缓存写四个互斥桶。不会额外叠加流式 usage。
+- 在 DSH 0.2.2-rc.5，DeepSeek 模型默认使用服务端搜索。会话只记录这次辅助搜索的请求，缺少独立的 Token 用量。内容安全拒绝如果只留下 `assistant/attempt`，其中的用量也在当前统计范围之外。
 - 首次升级会重读仍有日志的会话以补齐明细。无法拆分的总量继续计入「未拆分」，包括只有总量的旧摘要、缺失分项对应的差额，以及分项和超过总量的记录。导出 JSON 的每日 `tokenBreakdown` 包含这四个字段和 `unclassifiedTokens`，缺省分项表示无可用记录。
 - 根据宿主提供的 inheritedEventCount 排除分叉继承前缀。供应商和模型共同区分统计序列。
 - 首次创建统计存储时固定宿主本地时区，之后按该时区的自然日统计。近 7 / 30 日包含今天；当前连续天数允许最后活跃日为昨天。
